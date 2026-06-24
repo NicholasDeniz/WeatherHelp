@@ -5,18 +5,18 @@ This is a fullstack weather app that allows users to find a city and view their 
 # Stack Used
 
 - React: The frontend/client, will build the screen for the users to sees and interacts with. For example, the search box, search button, forecast, error messages, and more. 
-## User types in a city and clicks search. Sends city to backend. Displays the weather on the screen. 
+## User types in a city and clicks search. Calls the Weather Mateo API info. 
 
 - Vite: A tool to create and run React. React is considered the library while Vite sets the project up. Will help with creating the React folder structure, runs the app locally, refreshes the page fast, and for building the final version.
 ## Runs the React app while in development phase.
 
 - Node.js: Let me run JavaScript outside the browser. Which lets me use Javascript for the backend/server. For example, write code for receieving a request from React, talk to the weather API, and send data to React. 
-## Runs the backend server. Both Node and Express send weather data to React when gotten from Open-Meteo
+## Runs the backend server.
 
 - Express: It is the backend framework that runs Node.js. While Node give the ability to make a server, Express makes the process easier. With it I can create routes like /api/weather, /api/forecast, and /api/favorties.
 ## Creates the /api/weather route.
 
-- Open-Meteo Weather API: This is the outside weather service I will get the actual weather data from. So when the backend asks Open-Meteo, "What is the weather for this area?", it will send data back like thye temp, wind speed, rain chance, and more. 
+- Open-Meteo Weather API: This is the outside weather service I will get the actual weather data from. So when the backend asks Open-Meteo, "What is the weather for this area?", it will send data back like the temp, wind speed, rain chance, and more. 
 ## Provides the weather data.
 
 # Planned Features
@@ -103,4 +103,6 @@ Instructions will be provided later
 
 6/16/26 - Just installed vite still a bit confused on what it does but from whatI see it is useful for React. Starting with the frontend so my first goal will be creating a Weather Dashboard. Letting the user enter a city name and have a search button. It would show the current weather, the city (New York), the temp(70 degrees F), and the condition (clear). The idea will be user types city, user clicks search, app calss backend, backend calls weather API, weather data returns, and then React displays it. 
 
-6.16.26 - Minutes after the first post but wanted to seaprate from frontend notes to the backend notes. Ran npm init -y and npm install express cors dotenv to get the basic tools setup. Created index.jsin order for Node to know where the server begins. The backend should get the city name from React/User, use Open-Meteo to trun the city into a longitude and latitude, and send JSOn to React. Something like GET /api/weather?city=Boston.
+6/16/26 - Minutes after the first post but wanted to seaprate from frontend notes to the backend notes. Ran npm init -y and npm install express cors dotenv to get the basic tools setup. Created index.jsin order for Node to know where the server begins. The backend should get the city name from React/User, use Open-Meteo to trun the city into a longitude and latitude, and send JSOn to React. Something like GET /api/weather?city=Boston.
+
+6/23/26 - My Mentor said it would be better to no put the API routing in the backend/server part but instead put it in the frontend/client. I thought it would be better to put the API stuff in the backend and leave what the user mainly sees in the front end like html. It makes more sense to have it more direct instead of creating a back and forth. Although putting it in the backend maybe more useful in the long run when API keys, user accounts, and such populate my code. 
