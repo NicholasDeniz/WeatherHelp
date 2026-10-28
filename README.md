@@ -4,20 +4,25 @@ This is a fullstack weather app that allows users to find a city and view their 
 
 # Stack Used
 
-- React: The frontend/client, will build the screen for the users to sees and interacts with. For example, the search box, search button, forecast, error messages, and more. 
-## User types in a city and clicks search. Calls the Weather Mateo API info. 
+- React: The frontend/client, will build the screen for the users to sees and interacts with. For example, the search box, search button, forecast, error messages, and more.
+  
+User types in a city and clicks search. Calls the Weather Mateo API info. 
 
 - Vite: A tool to create and run React. React is considered the library while Vite sets the project up. Will help with creating the React folder structure, runs the app locally, refreshes the page fast, and for building the final version.
-## Runs the React app while in development phase.
+  
+Runs the React app while in development phase.
 
-- Node.js: Let me run JavaScript outside the browser. Which lets me use Javascript for the backend/server. For example, write code for receieving a request from React, talk to the weather API, and send data to React. 
-## Runs the backend server.
+- Node.js: Let me run JavaScript outside the browser. Which lets me use Javascript for the backend/server. For example, write code for receieving a request from React, talk to the weather API, and send data to React.
+
+Runs the backend server.
 
 - Express: It is the backend framework that runs on Node.js. While Node give the ability to make a server, Express makes the process easier. With it I can create routes like /api/weather, /api/forecast, and /api/favorties.
-## Creates the /api/weather route.
 
-- Open-Meteo Weather API: This is the outside weather service I will get the actual weather data from. So when the backend asks Open-Meteo, "What is the weather for this area?", it will send data back like the temp, wind speed, rain chance, and more. 
-## Provides the weather data.
+Creates the /api/weather route.
+
+- Open-Meteo Weather API: This is the outside weather service I will get the actual weather data from. So when the backend asks Open-Meteo, "What is the weather for this area?", it will send data back like the temp, wind speed, rain chance, and more.
+
+Provides the weather data.
 
 # Planned Features
 
