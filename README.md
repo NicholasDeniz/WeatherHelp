@@ -37,14 +37,16 @@ Provides the weather data.
 
 Will be professional catalogued with GitHub.
 
-Making a commit:
+
+## Making a commit:
 
 git status
 git add .
 git commit -m "Project setup"
 git push origin main
 
-Use branches:
+
+## Use branches:
 
 git checkout -b setup-client
 
@@ -52,11 +54,13 @@ git add .
 git commit -m "Set up React client"
 git push origin setup-client
 
-Pull Request:
+
+## Pull Request:
 
 When changes are made on a separate branch they can be merged into main. This Pull request will be made on GitHub. 
 
-Pull:
+
+## Pull:
 
 This is different from a Pull request, "git pull" will get the newest code from GitHub to my computer. 
 git pull origin main
