@@ -41,8 +41,11 @@ Will be professional catalogued with GitHub.
 ## Making a commit:
 
 git status
+
 git add .
+
 git commit -m "Project setup"
+
 git push origin main
 
 
@@ -51,7 +54,9 @@ git push origin main
 git checkout -b setup-client
 
 git add . 
+
 git commit -m "Set up React client"
+
 git push origin setup-client
 
 
