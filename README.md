@@ -1,23 +1,32 @@
 # WeatherHelp - Documentation
 
-This is a fullstack weather app that allows users to find a city and view their current weather and forecast.
+WeatherHelp is a learning project for searching cities and displaying weather. Weather requests run in the frontend. A future backend will support saved favorites, search history, and user accounts.
+
+## Frontend workflow
+
+1. The user enters a city name in React and submits the search.
+2. React trims the input and checks that it is not blank.
+3. React calls `client/src/api/searchCities.js`, which fetches matching cities directly from Open-Meteo.
+4. React stores the results in state and displays city, region, and country so the user can choose a match.
+5. Clicking a city supplies that result's latitude and longitude to `client/src/api/cityForecast.js`.
+6. That function fetches the forecast directly from Open-Meteo. React stores and displays the response.
+
+The API modules are ordinary JavaScript functions, not Express route handlers. React imports and calls them; there is no request to a local `/weather/city` or `/weather/forecast` route in this workflow.
+
+React will show loading, no-results, and error messages. The API functions check `response.ok` and throw on HTTP errors; React must catch request failures. Coordinates come from the selected search result rather than user-entered coordinate fields. Future backend routes must validate data before saving it.
 
 # Stack Used
 
-- React: The frontend/client, will build the screen for the users to sees and interacts with. For example, the search box, search button, forecast, error messages, and more. 
-## User types in a city and clicks search. Calls the Weather Mateo API info. 
+- React: Builds the search form, city selection, forecast display, and request messages. Stores input and fetched data in state and calls the API functions from event handlers.
 
 - Vite: A tool to create and run React. React is considered the library while Vite sets the project up. Will help with creating the React folder structure, runs the app locally, refreshes the page fast, and for building the final version.
 ## Runs the React app while in development phase.
 
-- Node.js: Let me run JavaScript outside the browser. Which lets me use Javascript for the backend/server. For example, write code for receieving a request from React, talk to the weather API, and send data to React. 
-## Runs the backend server.
+- Node.js: Runs JavaScript outside the browser, including Vite's development tools and the future backend.
 
-- Express: It is the backend framework that runs on Node.js. While Node give the ability to make a server, Express makes the process easier. With it I can create routes like /api/weather, /api/forecast, and /api/favorties.
-## Creates the /api/weather route.
+- Express: Planned for backend routes that manage favorites, search history, and accounts. Weather fetching does not currently need an Express server.
 
-- Open-Meteo Weather API: This is the outside weather service I will get the actual weather data from. So when the backend asks Open-Meteo, "What is the weather for this area?", it will send data back like the temp, wind speed, rain chance, and more. 
-## Provides the weather data.
+- Open-Meteo: The external geocoding and weather service. The browser requests matching cities and then hourly forecasts directly.
 
 # Planned Features
 
@@ -58,11 +67,21 @@ git pull origin main
 
 # Current Status
 
-Still developing
+The search and forecast modules have moved to `client/src/api/` and use default exports. City names are URL-encoded in search requests. `App.jsx` imports the functions but still displays the Vite starter interface; search, selection, forecast rendering, and UI validation are next. `server/index.js` is currently empty.
+
+The existing forecast request retrieves hourly data. Current conditions and daily forecasts remain planned features.
 
 # How to run
 
-Instructions will be provided later
+From the project folder:
+
+```powershell
+cd client
+npm install
+npm run dev
+```
+
+Open the local URL printed by Vite and leave the terminal running. No Express server is required for the frontend weather workflow. At this stage, the page still shows the starter interface.
 
 # Start plan
 
@@ -110,3 +129,8 @@ Instructions will be provided later
 6/30/26 - Created openMeteoTest.js in order to test the Open Meteo Api's. I set the Open Meteo Url's for both Geocoding and Forecast. I set a city, "Coram", and set a 0 index for testing purposes. The function searchCities will use the geocoding url and input Coram as the city name, getting a json response of different cities. The function cityForecast would use the forecast url to get things like wind direction and temp using the selected city logitude and latitude, getting a json response of the forecast. The main function will first call searchCities using the set city string Coram. Since there will be multiple cities I had to set it to citySuggestion. I took those suggestions and used the set 0 index to get the first result setting it to selectedCity. Now being able to access the longitude and latitude of the selected city I called the cityForecast function with them. I set those results to selectedCityForecast then used console.log it. I also added some error handling with response.ok to throw the error if something went wrong and used response.status to show what went wrong.
 
 10/28/26 - I recently graduated but I wanted to come back and get more practice. I set up Express and started a server on port 3000. I created and tested a GET route. Passed query parameters in city input to the backend. Separated searchCities into a server module and exported it then imported it with require. I connected my route to Open-Meteo and returned matching locations. I added a 400 response and return for missing city input. I then commited it to GitHub.
+
+10/31/26
+My Mentor and I decided to move the api handlers to the frontend. I moved searchCities and cityForecast into client/src/api/. I changed the default exports and imported them into App.jsx. Made the browser call Open Meteo directly. Cleared out the Express server in server/index.js. The flow is now React - search cities - user selects a city - fetch forecase using the coords - display weather
+
+11/3/26
