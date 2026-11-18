@@ -1,28 +1,65 @@
-import { useState } from 'react'
+﻿import { useState } from 'react'
 //import reactLogo from './assets/react.svg'
 //import viteLogo from './assets/vite.svg'
 //import heroImg from './assets/hero.png'
 import './App.css'
 
-// These functions fetch Open-Meteo data directly from the browser.
-//import searchCities from './api/searchCities'
-//import cityForecast from './api/cityForecast'
+// Sends city searches from the browser to Open-Meteo.
+import searchCities from './api/searchCities'
+import cityForecast from './api/cityForecast'
 
 function App() {
-  // cityInput in the current text, setCityInput is a function to change that text, '' means it starts empty, useState keeps the value between renders and when updated it tells React to update the screen
+  // Start with empty text. setCityInput saves what the user types.
   const [cityInput, setCityInput] = useState('')
+
+  // Start with an empty list. setCityResults saves the latest matches.
+  const [cityResults, setCityResults] = useState([])
+
+  // async lets this handler use await while the search is in progress.
+  async function handleSearch(event) {
+    event.preventDefault(); // Keep the form from navigating away.
+
+    const city = cityInput.trim(); // Remove spaces from the ends.
+
+    const matches = await searchCities(city); // Wait for the API response.
+
+    setCityResults(matches.results ?? []) // Save the list, or [] if it's missing.
+  }
+
+  async function handlePlaceClick(place) {
+    const forecast = await cityForecast(place.latitude, place.longitude);
+    console.log(forecast);
+  }
 
   return (
     <main>
+
       <h1>WeatherHelp</h1>
 
-      <label htmlFor="city">City name</label>
-      {/* value={cityInput} shows text in the state, onChange runs whenever typed, event.target.value is the input's updated text, setCityInput() saves the text and React updates the screen*/}
-      <input
-        id="city"
-        value={cityInput}
-        onChange={(event) => setCityInput(event.target.value)}
-      />
+      {/* Clicking Search or pressing Enter runs handleSearch. */}
+      <form onSubmit={handleSearch}>
+        {/* htmlFor links this label to the input with id="city". */}
+        <label htmlFor="city">City name</label>
+        {/* value shows the saved text and onChange saves each edit. */}
+        <input
+          id="city"
+          value={cityInput}
+          onChange={(event) => setCityInput(event.target.value)}
+        />
+
+        <button type="submit">Search</button>
+      </form>
+
+      <ul>
+        {cityResults.map((place) => (
+          <li key={place.id}>
+            <button type="button" onClick={() => handlePlaceClick(place)}>
+              {place.name}, {place.admin1}
+            </button>
+          </li>
+        ))}
+      </ul>
+
     </main>
   )
 }
